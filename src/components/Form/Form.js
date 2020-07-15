@@ -13,37 +13,32 @@ class Form extends Component {
 
   addRun = (event) => {
     event.preventDefault();
-    console.log(`in addRun`);
     this.setState({
-      lastRun: Number(this.state.currentRun),
+      lastRun: this.state.currentRun,
     });
 
     if (this.state.longestRun === 'No Data') {
       this.setState({
-        longestRun: Number(this.state.currentRun),
+        longestRun: this.state.currentRun,
       });
-    } else if (this.state.currentRun > this.state.lastRun) {
+    } else if (this.state.currentRun > this.state.longestRun) {
       this.setState({
-        longestRun: Number(this.state.currentRun),
+        longestRun: this.state.currentRun,
       });
     }
-
-    console.log(typeof this.state.lastRun);
   };
 
   handleChange = (event) => {
     this.setState({
       currentRun: Number(event.target.value),
     });
-
-    console.log(this.state.lastRun);
   };
 
   render() {
     return (
       <div>
         <form onSubmit={this.addRun}>
-          <input type="text" required placeholder="Miles Ran" onChange={this.handleChange} />
+          <input type="number" required placeholder="Miles Ran" onChange={this.handleChange} />
           <button>Add New Run</button>
         </form>
 
