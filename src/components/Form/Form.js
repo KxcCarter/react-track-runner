@@ -15,14 +15,25 @@ class Form extends Component {
     event.preventDefault();
     console.log(`in addRun`);
     this.setState({
-      lastRun: this.state.currentRun,
+      lastRun: Number(this.state.currentRun),
     });
-    console.log(this.state.lastRun);
+
+    if (this.state.longestRun === 'No Data') {
+      this.setState({
+        longestRun: Number(this.state.currentRun),
+      });
+    } else if (this.state.currentRun > this.state.lastRun) {
+      this.setState({
+        longestRun: Number(this.state.currentRun),
+      });
+    }
+
+    console.log(typeof this.state.lastRun);
   };
 
   handleChange = (event) => {
     this.setState({
-      currentRun: event.target.value,
+      currentRun: Number(event.target.value),
     });
 
     console.log(this.state.lastRun);
